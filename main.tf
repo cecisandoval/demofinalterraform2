@@ -6,7 +6,7 @@ terraform {
         
         }
     }
-    region = var.region-master
+    required_version = ">= 1.2.0"
     cloud {
         organization = "example-org-4f836e"
 
@@ -15,7 +15,7 @@ terraform {
         }
     }
 
-    required_version = ">= 1.2.0"
+    
 
 }
 
