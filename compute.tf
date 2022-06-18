@@ -101,16 +101,16 @@ resource "aws_lb_target_group_attachment" "attache_instance" {
 #------ SNS ---
 
 #create SNS notification
-resource "aws_sns_topic" "sns_notifications_topic" {
-    name = "sns_notifications_topic"
-}
+#resource "aws_sns_topic" "sns_notifications_topic" {
+    #name = "sns_notifications_topic"
+#}
 
 #create SNS subscription
-resource "aws_sns_topic_subscription" "sns_notifications_subscription" {
-    topic_arn = aws_sns_topic.sns_notifications_topic.arn
-    protocol = "email"
-    endpoint = "cecilia_sandoval@epam.com"
-}
+#resource "aws_sns_topic_subscription" "sns_notifications_subscription" {
+    #topic_arn = aws_sns_topic.sns_notifications_topic.arn
+    #protocol = "email"
+    #endpoint = "cecilia_sandoval@epam.com"
+#}
 
 #---- 
 #create autoscaling notification
@@ -123,7 +123,7 @@ resource "aws_autoscaling_notification" "agsns_notifications" {
         "autoscaling:EC2_INSTANCE_TERMINATE",
     ]
 
-    topic_arn = aws_sns_topic.sns_notifications_topic.arn
+    #topic_arn = aws_sns_topic.sns_notifications_topic.arn
 }
 
 #creeate template configuration
