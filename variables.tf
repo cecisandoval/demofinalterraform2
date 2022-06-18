@@ -39,12 +39,12 @@ variable "provider_token" {
 
 variable "AWS_ACCESS_KEY_ID" {
     type = string
-    default = "AKIAUEGDBJKUSKYZN7UE"
+    default = ""
 }
 
 variable "AWS_SECRET_ACCESS_KEY" {
     type = string
-    default = "k6sWOaPzhG6Zk5XzEmXeMYMTdI8xek4s36+PvF0S"
+    default = ""
 }
 
 #ami-0ee8244746ec5d6d4
