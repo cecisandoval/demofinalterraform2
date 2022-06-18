@@ -5,6 +5,13 @@ variable "profile"{
 
 }
 
+provider "aws" {
+    region = var.region
+    alias = "aws"
+    source = "hashicorp/aws"
+    version = "~> 4.16"
+}
+
 variable "region-master" {
     type = string
     default = "us-east-1"
