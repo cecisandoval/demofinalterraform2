@@ -3,9 +3,10 @@ terraform {
         aws = {
         source = "hashicorp/aws"
         version = "~> 4.16"
-        region = var.region-master
+        
         }
     }
+    region = var.region-master
     cloud {
         organization = "example-org-4f836e"
 
