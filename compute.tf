@@ -11,7 +11,7 @@
 
 #create EC2 instance 
 resource "aws_instance" "web_server1" {
-    provider = aws.region-master-
+    provider = aws.region-master
     ami = var.ami-master
     instance_type = var.instance-type
     associate_public_ip_address = true
