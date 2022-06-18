@@ -33,6 +33,15 @@ variable "provider_token" {
     default = "ca9kvEIuIYrIFA.atlasv1.l1hwGiUV0EGcqiStY944efrr5kSpuJuoD1yrOrP80Xh7yLzyBtk5yKJitqVAeK2hga4"
 }
 
+variable "AWS_ACCESS_KEY_ID" {
+    type = string
+    default = "AKIAUEGDBJKUSKYZN7UE"
+}
+
+variable "AWS_SECRET_ACCESS_KEY" {
+    type = string
+    default = "k6sWOaPzhG6Zk5XzEmXeMYMTdI8xek4s36+PvF0S"
+}
 
 #ami-0ee8244746ec5d6d4
 #ami-0ee8244746ec5d6d4
