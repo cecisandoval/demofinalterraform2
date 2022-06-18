@@ -40,8 +40,7 @@ resource "aws_internet_gateway" "igw" {
 
 #Get available AZs in VPC for region
 data "aws_availability_zones" "azs" {
-    provider = aws.region-master
-    #region = aws.region-master
+    provider = AWS_DEFAULT_REGION
     state = "available"
 }
 
