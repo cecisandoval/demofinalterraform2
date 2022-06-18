@@ -3,6 +3,7 @@ terraform {
         aws = {
         source = "hashicorp/aws"
         version = "~> 4.16"
+        region = var.region-master
         }
     }
     cloud {
@@ -12,6 +13,7 @@ terraform {
             name = "demoFinal"
         }
     }
+
     required_version = ">= 1.2.0"
 
 }
