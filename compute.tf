@@ -114,17 +114,17 @@ resource "aws_lb_target_group_attachment" "attache_instance" {
 
 #---- 
 #create autoscaling notification
-resource "aws_autoscaling_notification" "agsns_notifications" {
-    group_names = [
-    aws_autoscaling_group.AutoScalingGroupTask10.name]
+#resource "aws_autoscaling_notification" "agsns_notifications" {
+    #group_names = [
+    #aws_autoscaling_group.AutoScalingGroupTask10.name]
 
-    notifications = [
-        "autoscaling:EC2_INSTANCE_LAUNCH",
-        "autoscaling:EC2_INSTANCE_TERMINATE",
-    ]
+    #notifications = [
+        #"autoscaling:EC2_INSTANCE_LAUNCH",
+        #"autoscaling:EC2_INSTANCE_TERMINATE",
+    #]
 
     #topic_arn = aws_sns_topic.sns_notifications_topic.arn
-}
+#}
 
 #creeate template configuration
 resource "aws_launch_configuration" "instance_config" {
