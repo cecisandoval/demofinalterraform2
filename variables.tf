@@ -21,7 +21,7 @@ variable "ami-master" {
 }
 
 
-variable "ami-msql" {
+variable "ami-ubuntu" {
     type = string
     default = "ami-069a69e8f61c7b5be"
 }
@@ -47,5 +47,3 @@ variable "AWS_SECRET_ACCESS_KEY" {
     default = ""
 }
 
-#ami-0ee8244746ec5d6d4
-#ami-0ee8244746ec5d6d4

@@ -51,7 +51,7 @@ resource "aws_subnet" "sub_private1" {
     vpc_id = aws_vpc.vpc.id
     cidr_block = "192.168.1.0/26"
     tags = {
-        Name = "sub_private1_task8"
+        Name = "sub_private1"
     }
 
 }
@@ -63,7 +63,7 @@ resource "aws_subnet" "sub_private2" {
     vpc_id = aws_vpc.vpc.id
     cidr_block = "192.168.2.0/26"
     tags = {
-        Name = "sub_private2_task8"
+        Name = "sub_private1"
     }
 
 }
@@ -129,7 +129,16 @@ resource "aws_security_group" "sgmsql" {
         from_port  = 3306
         to_port = 3306
         protocol = "tcp"
-        cidr_blocks = ["0.0.0.0/0"]
+        #cidr_blocks = ["0.0.0.0/0"]
+        security_groups = [aws_security_group.sgw.id]
+    }
+    ingress {
+        description = "Allow port 3306"
+        from_port  = 3306
+        to_port = 3306
+        protocol = "tcp"
+        #cidr_blocks = ["0.0.0.0/0"]
+        security_groups = [aws_security_group.sgmsql.id]
     }
     egress {
         from_port = 0
@@ -186,6 +195,37 @@ resource "aws_security_group" "sgw" {
         security_groups = [aws_security_group.sglb.id]
         #cidr_blocks = ["0.0.0.0/0"]
     }
+    ingress {
+        description = "Allow port 80"
+        from_port  = 80
+        to_port = 80
+        protocol = "tcp"
+        security_groups = [aws_security_group.sgw.id]
+        #cidr_blocks = ["0.0.0.0/0"]
+    }
+    egress {
+        from_port = 0
+        to_port = 0
+        protocol = "-1"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
+}
+
+#create SG EFS
+resource "aws_security_group" "sgefs" {
+    provider = aws.region-master
+    name = "sgefs"
+    description = "sgefs"
+    vpc_id = aws_vpc.vpc.id
+    ingress {
+        description = "Allow port ssh"
+        from_port  = 2049
+        to_port = 2049
+        protocol = "tcp"
+        security_groups = [aws_security_group.sglb.id]
+        cidr_blocks = ["0.0.0.0/0"]
+    }  
     egress {
         from_port = 0
         to_port = 0
@@ -318,6 +358,35 @@ resource "aws_route_table_association" "set_subnets2private" {
     subnet_id = aws_subnet.sub_private2.id
     route_table_id = aws_route_table.private_rout2.id
 }
+
+resource "aws_db_subnet_group" "dbsubnetgroup" {
+    name = "dbsubnetgroup"
+    subnet_ids  = [aws_subnet.sub_privatemsql1.id, aws_subnet.sub_privatemsql2.id]
+}
+
+resource "aws_db_instance" "wpdb" {
+    #depends_on = ["aws_security_group.web"]
+    identifier = "wpdb"
+    allocated_storage = "10"
+    engine = "mysql"
+    engine_version = "5.7"
+    instance_class = "db.t2.micro"
+    name = "wpdb"
+    username = "wpdb"
+    password = "wpdbwpdb"
+    multi_az  = "True"
+    vpc_security_group_ids = [aws_security_group.sgmsql.id]
+    db_subnet_group_name  = "${aws_db_subnet_group.dbsubnetgroup.id}"
+
+}
+
+
+
+
+
+
+
+
 
 
 

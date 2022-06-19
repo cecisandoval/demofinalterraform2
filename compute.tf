@@ -7,18 +7,51 @@
   #public_key = file("~/.ssh/id_rsa.pub")
 #}
 
+#create EFS ----------------------
 
-#create EC2 instance 
+resource "aws_efs_file_system" "wordpressfs" {
+    creation_token = "wordpress-fs"
+
+    tags {
+        Name = "Wordpress FS"
+        Project = "wordpress"
+    }
+}
+
+resource "aws_efs_mount_target" "wordpress-a" {
+    file_system_id = aws_efs_file_system.wordpressfs.id
+    subnet_id = aws_subnet.sub_private1.id
+    security_groups = [aws_security_group.sgefs.id]
+
+}
+
+resource "aws_efs_mount_target" "wordpress-b" {
+    file_system_id = aws_efs_file_system.wordpressfs.id
+    subnet_id = aws_subnet.sub_private2.id
+    security_groups = [aws_security_group.sgefs.id]
+
+}
+
+
+data "template_file" "bootstrap" {
+    template = "${file("bootstrap.tpl")}"
+        vars {
+            dbhost = "${aws_db_instance.wpdb.address}"
+            efsid = "${aws_efs_file_system.wordpressfs.id}"
+  }
+}
+
+
 #create EC2 instance 
 resource "aws_instance" "web_server1" {
     provider = aws.region-master
-    ami = var.ami-master
+    ami = var.ami-ubuntu
     instance_type = var.instance-type
     associate_public_ip_address = true
     vpc_security_group_ids = [aws_security_group.sgw.id]
     subnet_id = aws_subnet.sub_private1.id
     key_name = "mykey"
-    #user_data = "${file("install_apache.sh")}"
+    user_data = "${data.template_file.bootstrap.rendered}"
 
     tags = {
 	Name = "web_server1"	
@@ -27,21 +60,11 @@ resource "aws_instance" "web_server1" {
 }
 
 
-#create EC2 instance MsQL
-resource "aws_instance" "msql_server1" {
-    provider = aws.region-master
-    ami = var.ami-msql
-    instance_type = var.instance-type
-    associate_public_ip_address = false
-    vpc_security_group_ids = [aws_security_group.sgmsql.id]
-    subnet_id = aws_subnet.sub_privatemsql1.id
-    key_name = "mykey"
-    #user_data = "${file("install_apache.sh")}"
-    tags = {
-	Name = "msql_server1"	
-	#Batch = "5AM"
-    }
-}
+
+
+
+
+
 
 
 #create Application LoadBalancer
@@ -132,8 +155,12 @@ resource "aws_lb_target_group_attachment" "attache_instance" {
 #creeate template configuration
 resource "aws_launch_configuration" "instance_config" {
     name = "web_config"
-    image_id = var.ami-master
+    image_id = var.ami-ubuntu
     instance_type = var.instance-type
+    key_name = "mykey"
+    security_groups = [aws_security_group.sgw.id]
+    user_data = "${data.template_file.bootstrap.rendered}"
+
 }
 
 
