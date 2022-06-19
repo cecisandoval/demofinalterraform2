@@ -12,7 +12,7 @@ variable  "AWS_DEFAULT_REGION" {
 
 variable "region-master" {
     type = string
-    default = "us-east-1"
+    default = var.AWS_DEFAULT_REGION
 }
 
 variable "ami-master" {
