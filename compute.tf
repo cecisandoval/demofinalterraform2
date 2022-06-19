@@ -8,7 +8,7 @@
 #}
 
 
-
+#create EC2 instance 
 #create EC2 instance 
 resource "aws_instance" "web_server1" {
     provider = aws.region-master
