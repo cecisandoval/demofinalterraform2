@@ -12,10 +12,6 @@
 resource "aws_efs_file_system" "wordpressfs" {
     creation_token = "wordpress-fs"
 
-    tags {
-        Name = "Wordpress FS"
-        Project = "wordpress"
-    }
 }
 
 resource "aws_efs_mount_target" "wordpress-a" {

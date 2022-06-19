@@ -9,7 +9,8 @@ terraform {
       version = "3.0.1"
     }
   }
-  required_version = ">= 1.2.0"
+  #required_version = ">= 1.2.0"
+  required_version = ">= 2.0.0"
 
   cloud {
     organization = "example-org-4f836e"
@@ -374,7 +375,7 @@ resource "aws_db_instance" "wpdb" {
     name = "wpdb"
     username = "wpdb"
     password = "wpdbwpdb"
-    multi_az  = "True"
+    #multi_az  = "True"
     vpc_security_group_ids = [aws_security_group.sgmsql.id]
     db_subnet_group_name  = "${aws_db_subnet_group.dbsubnetgroup.id}"
 
