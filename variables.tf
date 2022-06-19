@@ -17,13 +17,13 @@ variable "region-master" {
 
 variable "ami-master" {
     type = string
-    default = "ami-052efd3df9dad4825"
+    default = "ami-069a69e8f61c7b5be"
 }
 
 
 variable "ami-msql" {
     type = string
-    default = "ami-052efd3df9dad4825"
+    default = "ami-069a69e8f61c7b5be"
 }
 
 
