@@ -73,6 +73,9 @@ resource "aws_lb_target_group" "tglbtask8" {
         protocol = "HTTP"
         matcher = "200-299"
     }
+    tags = {
+        Name = "tglbtask8"
+    }
 
 }
 
