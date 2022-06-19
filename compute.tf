@@ -58,9 +58,9 @@ resource "aws_lb" "application_lb" {
 }
 
 #create target group
-resource "aws_lb_target_group" "tg-lb-task8" {
+resource "aws_lb_target_group" "tglbtask8" {
     provider = aws.region-master
-    name = "tg-lb-task8"
+    name = "tglbtask8"
     port = 80
     target_type = "instance"
     vpc_id = aws_vpc.vpc.id
@@ -68,7 +68,7 @@ resource "aws_lb_target_group" "tg-lb-task8" {
     health_check {
         enabled = true
         interval = 10
-        path = "/index.html"
+        path = "/"
         port = 80
         protocol = "HTTP"
         matcher = "200-299"
@@ -84,14 +84,14 @@ resource "aws_lb_listener" "listener-http" {
     protocol = "HTTP"
     default_action {
         type = "forward"
-        target_group_arn = aws_lb_target_group.tg-lb-task8.arn
+        target_group_arn = aws_lb_target_group.tglbtask8.arn
     }
 }
 
 #attache instance with Targe group
 resource "aws_lb_target_group_attachment" "attache_instance" {
     provider = aws.region-master
-    target_group_arn = aws_lb_target_group.tg-lb-task8.arn
+    target_group_arn = aws_lb_target_group.tglbtask8.arn
     target_id = aws_instance.web_server1.id
     port = 80
 
@@ -145,7 +145,7 @@ resource "aws_autoscaling_group" "AutoScalingGroupTask10" {
     force_delete = true
     launch_configuration = aws_launch_configuration.instance_config.name
     vpc_zone_identifier = [aws_subnet.sub_private1.id, aws_subnet.sub_private2.id]
-    target_group_arns = [aws_lb_target_group.tg-lb-task8.arn]
+    target_group_arns = [aws_lb_target_group.tglbtask8.arn]
     termination_policies = ["NewestInstance", "Default"]
     protect_from_scale_in = false
 
