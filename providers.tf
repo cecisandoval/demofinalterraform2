@@ -2,6 +2,7 @@ provider "aws" {
     profile = var.profile
     region = var.region-master
     alias = "region-master"
+    version = "3.26.0"
     
 
 }
