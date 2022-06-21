@@ -20,13 +20,13 @@ variable "region-master" {
 
 variable "ami-master" {
     type = string
-    default = "ami-069a69e8f61c7b5be"
+    default = "ami-02a584b50356d32f5"
 }
 
 
 variable "ami-ubuntu" {
     type = string
-    default = "ami-069a69e8f61c7b5be"
+    default = "ami-02a584b50356d32f5"
 }
 
 
