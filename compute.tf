@@ -63,22 +63,6 @@ resource "aws_instance" "web_server1" {
 
 
 
-
-
-
-#create Application LoadBalancer
-resource "aws_lb" "applicationlbtask8" {
-    provider = aws.region-master
-    name = "applicationlbtask8"
-    internal = false
-    load_balancer_type = "application"
-    security_groups = [aws_security_group.sglb.id]
-    subnets  = [aws_subnet.sub_public1.id,aws_subnet.sub_public2.id]
-    tags = {
-        Name = "applicationlbtask8"
-    }
-}
-
 #create target group
 resource "aws_lb_target_group" "tglbtask8" {
     provider = aws.region-master

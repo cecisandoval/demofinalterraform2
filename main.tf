@@ -360,6 +360,20 @@ resource "aws_route_table_association" "set_subnets2private" {
     route_table_id = aws_route_table.private_rout2.id
 }
 
+
+#create Application LoadBalancer
+resource "aws_lb" "applicationlbtask8" {
+    provider = aws.region-master
+    name = "applicationlbtask8"
+    internal = false
+    load_balancer_type = "application"
+    security_groups = [aws_security_group.sglb.id]
+    subnets  = [aws_subnet.sub_public1.id,aws_subnet.sub_public2.id]
+    tags = {
+        Name = "applicationlbtask8"
+    }
+}
+
 resource "aws_db_subnet_group" "dbsubnetgroup" {
     name = "dbsubnetgroup"
     subnet_ids  = [aws_subnet.sub_privatemsql1.id, aws_subnet.sub_privatemsql2.id]
