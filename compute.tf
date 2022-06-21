@@ -30,11 +30,15 @@ resource "aws_efs_mount_target" "wordpress-b" {
 
 
 data "template_file" "bootstrap" {
-    template = "${file("bootstrap.tpl")}"
-        vars {
-            dbhost = "${aws_db_instance.wpdb.address}"
-            efsid = "${aws_efs_file_system.wordpressfs.id}"
-  }
+
+    template = "${file("bootstrap1.tpl")}"
+    vars = {
+        dbhost = "${aws_db_instance.wpdb.address}"
+        efsid = "${aws_efs_file_system.wordpressfs.id}"
+        DB_User = "wordpress"
+        DB_Password = "AdminCeci1_"
+        DB_NAME = "wordpress"
+    }
 }
 
 
