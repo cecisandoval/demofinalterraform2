@@ -70,6 +70,7 @@ resource "aws_instance" "web_server1" {
 #create Application LoadBalancer
 resource "aws_lb" "application_lb" {
     provider = aws.region-master
+    region = var.region-master
     name = "applicationlb"
     internal = false
     load_balancer_type = "application"
