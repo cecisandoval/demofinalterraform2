@@ -30,7 +30,6 @@ resource "aws_efs_mount_target" "wordpress-b" {
 
 
 data "template_file" "bootstrap" {
-
     template = "${file("bootstrap1.tpl")}"
     vars = {
         dbhost = "${aws_db_instance.wpdb.address}"

@@ -10,7 +10,6 @@ variable  "AWS_DEFAULT_REGION" {
     default = "us-east-1"
 }
 
-
 variable "region-master" {
     type = string
     default = "us-east-1"
@@ -18,13 +17,13 @@ variable "region-master" {
 
 variable "ami-master" {
     type = string
-    default = "ami-07d6b1af9b846427f"
+    default = "ami-069a69e8f61c7b5be"
 }
 
 
 variable "ami-ubuntu" {
     type = string
-    default = "ami-07d6b1af9b846427f"
+    default = "ami-069a69e8f61c7b5be"
 }
 
 
