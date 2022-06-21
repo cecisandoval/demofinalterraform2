@@ -7,12 +7,13 @@ variable "profile"{
 
 variable  "AWS_DEFAULT_REGION" {
     type = string
-    default = "us-east-1"
+    default = "us-west-2"
 }
 
 variable "region-master" {
     type = string
-    default = "us-east-1"
+    #default = "us-east-1"
+    default = "us-west-2"
 }
 
 variable "ami-master" {
