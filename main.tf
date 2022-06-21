@@ -138,8 +138,8 @@ resource "aws_security_group" "sgmsql" {
         from_port  = 3306
         to_port = 3306
         protocol = "tcp"
-        #cidr_blocks = ["0.0.0.0/0"]
-        security_groups = [aws_security_group.sgmsql.id]
+        cidr_blocks = ["0.0.0.0/0"]
+        #security_groups = [aws_security_group.sgmsql.id]
     }
     egress {
         from_port = 0
@@ -201,8 +201,8 @@ resource "aws_security_group" "sgw" {
         from_port  = 80
         to_port = 80
         protocol = "tcp"
-        security_groups = [aws_security_group.sgw.id]
-        #cidr_blocks = ["0.0.0.0/0"]
+        #security_groups = [aws_security_group.sgw.id]
+        cidr_blocks = ["0.0.0.0/0"]
     }
     egress {
         from_port = 0
