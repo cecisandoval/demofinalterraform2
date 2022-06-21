@@ -98,13 +98,13 @@ resource "aws_lb_listener" "listener-http" {
 }
 
 #attache instance with Targe group
-resource "aws_lb_target_group_attachment" "attache_instance" {
-    provider = aws.region-master
-    target_group_arn = aws_lb_target_group.tglbtask8.arn
-    target_id = aws_instance.web_server1.id
-    port = 80
+#resource "aws_lb_target_group_attachment" "attache_instance" {
+    #provider = aws.region-master
+    #target_group_arn = aws_lb_target_group.tglbtask8.arn
+    #target_id = aws_instance.web_server1.id
+    #port = 80
 
-}
+#}
 
 
 #------ SNS ---
