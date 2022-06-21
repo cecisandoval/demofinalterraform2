@@ -67,7 +67,7 @@ resource "aws_instance" "web_server1" {
 
 
 #create Application LoadBalancer
-resource "aws_lb" "application_lb" {
+resource "aws_lb" "applicationlbtask8" {
     provider = aws.region-master
     name = "applicationlb"
     internal = false
@@ -75,7 +75,7 @@ resource "aws_lb" "application_lb" {
     security_groups = [aws_security_group.sglb.id]
     subnets  = [aws_subnet.sub_public1.id,aws_subnet.sub_public2.id]
     tags = {
-        Name = "application_lb"
+        Name = "applicationlbtask8"
     }
 }
 
@@ -104,7 +104,7 @@ resource "aws_lb_target_group" "tglbtask8" {
 #create listener
 resource "aws_lb_listener" "listener-http" {
     provider = aws.region-master
-    load_balancer_arn = aws_lb.application_lb.arn
+    load_balancer_arn = aws_lb.applicationlbtask8.arn
     port = "80"
     protocol = "HTTP"
     default_action {
