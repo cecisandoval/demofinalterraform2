@@ -32,7 +32,8 @@ resource "aws_efs_mount_target" "wordpress-b" {
 data "template_file" "bootstrap" {
     template = "${file("scriptwp1.tpl")}"
     vars = {
-        dbhost = "${aws_db_instance.wpdb.address}"
+        #dbhost = "${aws_db_instance.wpdb.address}"
+        dbhost = "db"
         efsid = "${aws_efs_file_system.wordpressfs.id}"
         DB_User = "wordpress"
         DB_Password = "AdminCeci1"
@@ -40,9 +41,6 @@ data "template_file" "bootstrap" {
         LB_Address = "${aws_lb.applicationlbtask8.dns_name}"
     }
 }
-
-
-
 
 
 #create target group
@@ -65,6 +63,19 @@ resource "aws_lb_target_group" "tglbtask8" {
         Name = "tglbtask8"
     }
 
+}
+
+#create Application LoadBalancer
+resource "aws_lb" "applicationlbtask8" {
+    provider = aws.region-master
+    name = "applicationlbtask8"
+    internal = false
+    load_balancer_type = "application"
+    security_groups = [aws_security_group.sglb.id]
+    subnets  = [aws_subnet.sub_public1.id,aws_subnet.sub_public2.id]
+    tags = {
+        Name = "applicationlbtask8"
+    }
 }
 
 #create listener
