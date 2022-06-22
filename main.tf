@@ -363,14 +363,6 @@ resource "aws_route_table_association" "set_subnets2private" {
 
 
 
-#resource "aws_db_subnet_group" "dbsubnetgroup" {
-    #name = "dbsubnetgroup"
-    #subnet_ids  = [aws_subnet.sub_privatemsql1.id, aws_subnet.sub_privatemsql2.id]
-#}
-
-
-
-
 
 
 
