@@ -381,18 +381,18 @@ resource "aws_db_subnet_group" "dbsubnetgroup" {
 
 resource "aws_db_instance" "wpdb" {
     #depends_on = ["aws_security_group.web"]
-    identifier = "wpdb"
+    identifier = "wordpress"
     allocated_storage = "10"
     engine = "mysql"
     engine_version = "5.7"
     instance_class = "db.t2.micro"
-    name = "wpdb"
-    username = "wpdb"
-    password = "wpdbwpdb"
-    #multi_az  = "True"
+    name = "wordpress"
+    username = "wordpress"
+    password = "AdminCeci1_"
+    multi_az  = true
     vpc_security_group_ids = [aws_security_group.sgmsql.id]
     db_subnet_group_name  = "${aws_db_subnet_group.dbsubnetgroup.id}"
-
+    
 }
 
 

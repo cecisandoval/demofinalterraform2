@@ -30,34 +30,16 @@ resource "aws_efs_mount_target" "wordpress-b" {
 
 
 data "template_file" "bootstrap" {
-    template = "${file("bootstrap1.tpl")}"
+    template = "${file("scriptwp1.tpl")}"
     vars = {
         dbhost = "${aws_db_instance.wpdb.address}"
         efsid = "${aws_efs_file_system.wordpressfs.id}"
         DB_User = "wordpress"
-        DB_Password = "AdminCeci1_"
+        DB_Password = "AdminCeci1"
         DB_NAME = "wordpress"
+        LB_Address = "${aws_lb.applicationlbtask8.dns_name}"
     }
 }
-
-
-#create EC2 instance 
-resource "aws_instance" "web_server1" {
-    provider = aws.region-master
-    ami = var.ami-ubuntu
-    instance_type = var.instance-type
-    associate_public_ip_address = true
-    vpc_security_group_ids = [aws_security_group.sgw.id]
-    subnet_id = aws_subnet.sub_private1.id
-    key_name = "mykey"
-    user_data = "${data.template_file.bootstrap.rendered}"
-
-    tags = {
-	Name = "web_server1"	
-	#Batch = "5AM"
-    }
-}
-
 
 
 
