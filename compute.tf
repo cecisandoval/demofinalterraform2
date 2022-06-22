@@ -119,8 +119,8 @@ resource "aws_lb_listener" "listener-http" {
 
 #creeate template configuration
 resource "aws_launch_configuration" "instance_config" {
-    name = "web_config"
-    image_id = var.ami-ubuntu
+    name = "web_wp"
+    image_id = var.ami-master
     instance_type = var.instance-type
     key_name = "mykey"
     security_groups = [aws_security_group.sgw.id]
