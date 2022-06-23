@@ -50,6 +50,7 @@ resource "aws_db_instance" "wpdb" {
 }
 
 
+
 data "template_file" "bootstrap" {
     template = "${file("scriptwp1.tpl")}"
     vars = {
