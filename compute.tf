@@ -36,13 +36,13 @@ resource "aws_db_subnet_group" "dbsubnetgroup" {
 resource "aws_db_instance" "wpdb" {
     #depends_on = ["aws_security_group.web"]
     identifier = "wordpress"
-    allocated_storage = "10"
+    allocated_storage = "5"
     engine = "mysql"
     engine_version = "5.7"
-    instance_class = "db.t2.micro"
+    instance_class = "db.t3.small"
     name = "wordpress"
     username = "wordpress"
-    password = "AdminCeci1_"
+    password = "AdminCeci1"
     multi_az  = true
     vpc_security_group_ids = [aws_security_group.sgmsql.id]
     db_subnet_group_name  = "${aws_db_subnet_group.dbsubnetgroup.id}"
@@ -54,8 +54,8 @@ data "template_file" "bootstrap" {
     template = "${file("scriptwp1.tpl")}"
     vars = {
         dbhost = "${aws_db_instance.wpdb.address}"
-        #dbhost = "db"
         efsid = "${aws_efs_file_system.wordpressfs.id}"
+        regionid = aws.region-master
         DB_User = "wordpress"
         DB_Password = "AdminCeci1"
         DB_NAME = "wordpress"
