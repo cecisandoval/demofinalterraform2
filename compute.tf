@@ -156,11 +156,11 @@ resource "aws_launch_configuration" "instance_config" {
 #creeate autoscaling group
 resource "aws_autoscaling_group" "AutoScalingGroupTask10" {
     name = "AutoScalingGroupTask10"
-    max_size = 3
-    min_size = 2
+    max_size = 1
+    min_size = 1
     health_check_grace_period = 30
     health_check_type  = "EC2"
-    desired_capacity = 2
+    desired_capacity = 1
     force_delete = true
     launch_configuration = aws_launch_configuration.instance_config.name
     vpc_zone_identifier = [aws_subnet.sub_private1.id, aws_subnet.sub_private2.id]

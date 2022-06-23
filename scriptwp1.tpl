@@ -19,7 +19,9 @@ fi
 sudo a2ensite wordpress
 sudo a2enmod rewrite
 sudo a2dissite 000-default
+sudo service apache2 reload
 if [[ ! -f "/srv/www/wordpress/wp-config.php" ]]; then
+    echo "============ARCHIVOS================="
     sudo -u www-data cp /srv/www/wordpress/wp-config-sample.php /srv/www/wordpress/wp-config.php
     sed -i "s/'username_here'/wordpress/g" /srv/www/wordpress/wp-config.php
     sed -i "s/'password_here'/AdminCeci1/g" /srv/www/wordpress/wp-config.php
@@ -27,6 +29,6 @@ if [[ ! -f "/srv/www/wordpress/wp-config.php" ]]; then
     sed -i "s/'localhost'/${dbhost}:3306/g" /srv/www/wordpress/wp-config.php
     echo "============================="
 if
-sudo service apache2 reload
 cat /srv/www/wordpress/wp-config.php
+cat /etc/apache2/sites-available/wordpress.conf
 echo "============todo=bien=final================="
