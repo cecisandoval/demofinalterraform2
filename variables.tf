@@ -20,7 +20,7 @@ variable "region-master" {
 
 variable "ami-master" {
     type = string
-    default = "ami-09f20bd8a4826f04c"
+    default = "ami-09f27c38d6089b2df"
 }
 
 
@@ -29,7 +29,7 @@ variable "ami-master" {
 
 variable "ami-ubuntu" {
     type = string
-    default = "ami-09f20bd8a4826f04c"
+    default = "ami-09f27c38d6089b2df"
     #default = "ami-02a584b50356d32f5"
 }
 
