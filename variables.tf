@@ -20,13 +20,16 @@ variable "region-master" {
 
 variable "ami-master" {
     type = string
-    default = "ami-0cb388aa2bd680075"
+    default = "ami-09f20bd8a4826f04c"
 }
+
+
+
 
 
 variable "ami-ubuntu" {
     type = string
-    default = "ami-0cb388aa2bd680075"
+    default = "ami-09f20bd8a4826f04c"
     #default = "ami-02a584b50356d32f5"
 }
 
@@ -36,10 +39,10 @@ variable "instance-type" {
     default = "t2.micro"
 }
 
-variable "provider_token" {
-    type = string
-    default = "ca9kvEIuIYrIFA.atlasv1.l1hwGiUV0EGcqiStY944efrr5kSpuJuoD1yrOrP80Xh7yLzyBtk5yKJitqVAeK2hga4"
-}
+#variable "provider_token" {
+    #type = string
+    #default = "ca9kvEIuIYrIFA.atlasv1.l1hwGiUV0EGcqiStY944efrr5kSpuJuoD1yrOrP80Xh7yLzyBtk5yKJitqVAeK2hga4"
+#}
 
 
 
