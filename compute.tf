@@ -55,7 +55,7 @@ data "template_file" "bootstrap" {
     vars = {
         dbhost = "${aws_db_instance.wpdb.address}"
         efsid = "${aws_efs_file_system.wordpressfs.id}"
-        regionid = aws.region-master
+        regionid = var.region-master
         DB_User = "wordpress"
         DB_Password = "AdminCeci1"
         DB_NAME = "wordpress"
