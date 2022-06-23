@@ -41,6 +41,9 @@ variable "provider_token" {
     default = "ca9kvEIuIYrIFA.atlasv1.l1hwGiUV0EGcqiStY944efrr5kSpuJuoD1yrOrP80Xh7yLzyBtk5yKJitqVAeK2hga4"
 }
 
+
+
+
 variable "AWS_ACCESS_KEY_ID" {
     type = string
     default = ""
