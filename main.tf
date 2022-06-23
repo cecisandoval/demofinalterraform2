@@ -360,8 +360,27 @@ resource "aws_route_table_association" "set_subnets2private" {
     route_table_id = aws_route_table.private_rout2.id
 }
 
+resource "aws_db_subnet_group" "dbsubnetgroup" {
+    name = "dbsubnetgroup"
+    subnet_ids  = [aws_subnet.sub_privatemsql1.id, aws_subnet.sub_privatemsql2.id]
+}
 
 
+resource "aws_db_instance" "wpdb" {
+    #depends_on = ["aws_security_group.web"]
+    identifier = "wordpress"
+    allocated_storage = "5"
+    engine = "mysql"
+    engine_version = "5.7"
+    instance_class = "db.t3.small"
+    name = "wordpress"
+    username = "wordpress"
+    password = "AdminCeci1"
+    multi_az  = true
+    vpc_security_group_ids = [aws_security_group.sgmsql.id]
+    db_subnet_group_name  = "${aws_db_subnet_group.dbsubnetgroup.id}"
+    
+}
 
 
 

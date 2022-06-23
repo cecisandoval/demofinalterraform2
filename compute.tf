@@ -28,28 +28,12 @@ resource "aws_efs_mount_target" "wordpress-b" {
 
 }
 
-resource "aws_db_subnet_group" "dbsubnetgroup" {
-    name = "dbsubnetgroup"
-    subnet_ids  = [aws_subnet.sub_privatemsql1.id, aws_subnet.sub_privatemsql2.id]
-}
 
 
 
 
 
-data "template_file" "bootstrap" {
-    template = "${file("scriptwp1.tpl")}"
-    vars = {
-        #dbhost = "${aws_db_instance.wpdb.address}"
-        dbhost = "db"
-        efsid = "${aws_efs_file_system.wordpressfs.id}"
-        regionid = var.region-master
-        DB_User = "wordpress"
-        DB_Password = "AdminCeci1"
-        DB_NAME = "wordpress"
-        LB_Address = "${aws_lb.applicationlbtask8.dns_name}"
-    }
-}
+
 
 
 #create target group
@@ -99,6 +83,10 @@ resource "aws_lb_listener" "listener-http" {
     }
 }
 
+
+
+
+
 #attache instance with Targe group
 #resource "aws_lb_target_group_attachment" "attache_instance" {
     #provider = aws.region-master
@@ -136,6 +124,22 @@ resource "aws_lb_listener" "listener-http" {
 
     #topic_arn = aws_sns_topic.sns_notifications_topic.arn
 #}
+
+
+data "template_file" "bootstrap" {
+    template = "${file("scriptwp1.tpl")}"
+    vars = {
+        dbhost = "${aws_db_instance.wpdb.address}"
+        #dbhost = "db"
+        efsid = "${aws_efs_file_system.wordpressfs.id}"
+        regionid = var.region-master
+        DB_User = "wordpress"
+        DB_Password = "AdminCeci1"
+        DB_NAME = "wordpress"
+        LB_Address = "${aws_lb.applicationlbtask8.dns_name}"
+    }
+}
+
 
 #creeate template configuration
 resource "aws_launch_configuration" "instance_config" {
