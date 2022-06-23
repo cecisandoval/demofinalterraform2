@@ -23,10 +23,10 @@ sudo service apache2 reload
 if [[ ! -f "/srv/www/wordpress/wp-config.php" ]]; then
     echo "============ARCHIVOS================="
     sudo -u www-data cp /srv/www/wordpress/wp-config-sample.php /srv/www/wordpress/wp-config.php
-    sed -i "s/'username_here'/wordpress/g" /srv/www/wordpress/wp-config.php
-    sed -i "s/'password_here'/AdminCeci1/g" /srv/www/wordpress/wp-config.php
-    sed -i "s/'database_name_here'/wordpress/g" /srv/www/wordpress/wp-config.php
-    sed -i "s/'localhost'/${dbhost}:3306/g" /srv/www/wordpress/wp-config.php
+    sed -i "s/'username_here'/'wordpress'/g" /srv/www/wordpress/wp-config.php
+    sed -i "s/'password_here'/'AdminCeci1'/g" /srv/www/wordpress/wp-config.php
+    sed -i "s/'database_name_here'/'wordpress'/g" /srv/www/wordpress/wp-config.php
+    sed -i "s/'localhost'/'${dbhost}:3306'/g" /srv/www/wordpress/wp-config.php
     echo "============================="
 if
 cat /srv/www/wordpress/wp-config.php
